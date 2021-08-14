@@ -3,7 +3,7 @@ aws:
   access-key: xxxxxxxxxxxx
   secret-key: xxxxxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   region: us-east-2
-  s3-bucket-name: bucketnamee
+  s3-bucket-name: bucketname
 
 
 spring:
