@@ -1,8 +1,6 @@
 package com.filestorage.awss3filespring.configuration;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @ConfigurationProperties(prefix = "aws", ignoreUnknownFields = false)
-public class AwsConfig {
+public class AwsProperties {
 
     /**
      *  Aws access key ID
@@ -35,7 +33,4 @@ public class AwsConfig {
      *  Aws s3 bucket name
      */
     private String s3BucketName;
-
-
-
 }
