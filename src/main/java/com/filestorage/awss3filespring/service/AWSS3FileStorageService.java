@@ -6,9 +6,8 @@ public interface AWSS3FileStorageService {
 
     /**
      * @param file MultipartFile file
-     * @return upload file to awsS3
      */
-    String uploadFile(MultipartFile file);
+    void uploadFile(MultipartFile file);
 
 
     /**
