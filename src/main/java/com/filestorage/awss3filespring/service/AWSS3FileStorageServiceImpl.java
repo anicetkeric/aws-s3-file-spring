@@ -9,6 +9,7 @@ import com.filestorage.awss3filespring.configuration.AwsProperties;
 import com.filestorage.awss3filespring.exception.FileStorageException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,8 +31,9 @@ public class AWSS3FileStorageServiceImpl implements AWSS3FileStorageService {
     /**
      * {@inheritDoc}
      */
+    @Async
     @Override
-    public String uploadFile(MultipartFile multipartFile) {
+    public void uploadFile(MultipartFile multipartFile) {
         String fileName = multipartFile.getOriginalFilename();
 
         try {
@@ -43,7 +45,7 @@ public class AWSS3FileStorageServiceImpl implements AWSS3FileStorageService {
 
             PutObjectRequest putObjectRequest = new PutObjectRequest(awsProperties.getS3BucketName(), fileName, file);
 
-            PutObjectResult response = amazonS3.putObject(putObjectRequest);
+            amazonS3.putObject(putObjectRequest);
             //removing the file created in the server
             file.delete();
 
@@ -51,13 +53,12 @@ public class AWSS3FileStorageServiceImpl implements AWSS3FileStorageService {
             log.error("error [" + ex.getMessage() + "] occurred while uploading file.");
             throw new FileStorageException("Could not upload file");
         }
-
-        return fileName;
     }
 
     /**
      * {@inheritDoc}
      */
+    @Async
     @Override
     public void deleteFile(String fileName) {
         try {

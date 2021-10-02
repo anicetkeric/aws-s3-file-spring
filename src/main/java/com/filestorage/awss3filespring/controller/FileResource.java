@@ -40,11 +40,10 @@ public class FileResource {
                                                @FileMaxSize
                                                @ValidFileType MultipartFile file) {
 
-        String fileName = awss3FileStorageService.uploadFile(file);
-
+        awss3FileStorageService.uploadFile(file);
         String fileDownloadUri = null;
 
-        return new ResponseEntity<>(new BaseResponse(new FileResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize()), "File uploaded with success!", false), HttpStatus.CREATED);
+        return new ResponseEntity<>(new BaseResponse(new FileResponse(file.getOriginalFilename(), fileDownloadUri, file.getContentType(), file.getSize()), "File uploaded with success!", false), HttpStatus.CREATED);
     }
 
     @DeleteMapping
